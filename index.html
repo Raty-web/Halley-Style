@@ -1,99 +1,68 @@
-<!DOCTYPE html>
-<html lang="zh">
-<head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Lookbook | Outfit Gallery</title>
+<!-- 背景文字容器，放在 body 最底层 -->
+<div class="halley-background"></div>
 
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+<style>
+/* ===== 背景文字样式 ===== */
+.halley-background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none; /* 不阻挡页面交互 */
+    overflow: hidden;
+    z-index: -1; /* 放在所有元素后面 */
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; /* Professional 字体 */
+}
 
-    <!-- 外部 CSS -->
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
+.halley-background span {
+    position: absolute;
+    font-size: 50px;
+    color: rgba(0,0,0,0.05); /* 远景灰色/透明感 */
+    white-space: nowrap;
+    filter: blur(2px); /* 模糊呈现远视效果 */
+    user-select: none;
+}
+</style>
 
-<!-- ========== HEADER ========== -->
-<header>
-    <h1>Halley Style</h1>
-    <p>Your best style designer</p>
-</header>
+<script>
+const container = document.querySelector('.halley-background');
+const text = "Halley Style ";
+const rows = 10; // 行数
+const cols = 20; // 每行文字数量
 
-<!-- ========== FILTER BAR ========== -->
-<div class="filter-bar">
-    <button class="filter-btn active" data-category="all">全部</button>
-    <button class="filter-btn" data-category="minimalist">极简</button>
-    <button class="filter-btn" data-category="korean">韩系</button>
-    <button class="filter-btn" data-category="street">街头</button>
-</div>
+// 生成文字链条
+for (let r = 0; r < rows; r++) {
+    for (let c = 0; c < cols; c++) {
+        const span = document.createElement('span');
+        span.textContent = text;
+        // 随机初始位置
+        span.style.left = `${-c * 300}px`; 
+        span.style.top = `${r * 80 + Math.random()*20}px`;
+        container.appendChild(span);
+    }
+}
 
-<!-- ========== GALLERY GRID ========== -->
-<div class="grid">
+// 动画逻辑
+const spans = container.querySelectorAll('span');
+let speed = 0.2; // 移动速度，数值越小越慢
 
-    <!-- Card 1 -->
-    <div class="card" data-category="minimalist">
-        <img src="https://raw.githubusercontent.com/Raty-web/Halley-Style/main/images/images.png" alt="outfit">
-        <div class="card-content">
-            <h3>Minimalist Beige Set</h3>
-            <p>米色极简通勤套装，柔和干净，适合各种场合。</p>
-            <a href="#" class="buy-btn">购买链接</a>
-        </div>
-    </div>
+function animate() {
+    spans.forEach(span => {
+        let currentX = parseFloat(span.style.left);
+        let currentY = parseFloat(span.style.top);
+        currentX += speed;
+        currentY -= speed * 0.5; // 左下 → 右上方向
+        // 循环回到左下
+        if (currentX > window.innerWidth + 200) {
+            currentX = -200;
+            currentY = window.innerHeight + 50;
+        }
+        span.style.left = currentX + "px";
+        span.style.top = currentY + "px";
+    });
+    requestAnimationFrame(animate);
+}
 
-    <!-- Card 2 -->
-    <div class="card" data-category="korean">
-        <img src="https://picsum.photos/id/1027/600/900" alt="outfit">
-        <div class="card-content">
-            <h3>Korean Soft Girl</h3>
-            <p>粉白韩系软妹风，温柔外套＋轻柔色调。</p>
-            <a href="#" class="buy-btn">Shopee 链接</a>
-        </div>
-    </div>
-
-    <!-- Card 3 -->
-    <div class="card" data-category="street">
-        <img src="https://picsum.photos/id/1005/600/900" alt="outfit">
-        <div class="card-content">
-            <h3>Street Style Black Fit</h3>
-            <p>黑色街头风，酷感十足，显瘦且适合拍照。</p>
-            <a href="#" class="buy-btn">Taobao 链接</a>
-        </div>
-    </div>
-
-    <!-- Card 4 -->
-    <div class="card" data-category="minimalist">
-        <img src="https://picsum.photos/id/1018/600/900" alt="outfit">
-        <div class="card-content">
-            <h3>White Clean Fit</h3>
-            <p>白色清爽穿搭，高级且自然，通勤最佳搭配。</p>
-            <a href="#" class="buy-btn">购买链接</a>
-        </div>
-    </div>
-
-    <!-- Card 5 -->
-    <div class="card" data-category="korean">
-        <img src="https://picsum.photos/id/1024/600/900" alt="outfit">
-        <div class="card-content">
-            <h3>Korean Winter Layer</h3>
-            <p>韩系百搭大衣＋围巾，冬天拍照必备。</p>
-            <a href="#" class="buy-btn">购买链接</a>
-        </div>
-    </div>
-
-    <!-- Card 6 -->
-    <div class="card" data-category="street">
-        <img src="https://picsum.photos/id/1012/600/900" alt="outfit">
-        <div class="card-content">
-            <h3>Urban Street Grey</h3>
-            <p>灰黑街头风，低调却有个性。</p>
-            <a href="#" class="buy-btn">购买链接</a>
-        </div>
-    </div>
-
-</div>
-
-<!-- ========== JS ========== -->
-<script src="script.js"></script>
-
-</body>
-</html>
+animate();
+</script>
