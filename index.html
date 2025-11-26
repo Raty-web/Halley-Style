@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Lookbook | Outfit Gallery</title>
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Inter', sans-serif;
+            background: #fafafa;
+            color: #333;
+        }
+
+        header {
+            text-align: center;
+            padding: 40px 20px 10px;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 32px;
+            font-weight: 600;
+        }
+
+        header p {
+            margin-top: 8px;
+            font-size: 15px;
+            color: #666;
+        }
+
+        /* Masonry Grid */
+        .grid {
+            column-count: 3;
+            column-gap: 20px;
+            padding: 20px;
+            max-width: 1200px;
+            margin: auto;
+        }
+
+        @media(max-width: 900px) {
+            .grid { column-count: 2; }
+        }
+
+        @media(max-width: 600px) {
+            .grid { column-count: 1; }
+        }
+
+        .card {
+            background: #fff;
+            display: inline-block;
+            margin-bottom: 20px;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+        }
+
+        .card img {
+            width: 100%;
+            display: block;
+        }
+
+        .card-content {
+            padding: 15px 18px 20px;
+        }
+
+        .card-content h3 {
+            margin: 0 0 8px;
+            font-size: 18px;
+            font-weight: 600;
+        }
+
+        .card-content p {
+            margin: 0 0 12px;
+            font-size: 14px;
+            color: #555;
+            line-height: 1.5;
+        }
+
+        .buy-btn {
+            display: inline-block;
+            padding: 10px 14px;
+            background: #000;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 8px;
+            font-size: 14px;
+            transition: 0.2s;
+        }
+
+        .buy-btn:hover {
+            background: #444;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Lookbook</h1>
+    <p>Weekly Outfit Inspiration · Korean · Minimalist · Streetwear</p>
+</header>
+
+<div class="grid">
+    <!-- Card 1 -->
+    <div class="card">
+        <img src="https://picsum.photos/id/1011/600/900" alt="outfit">
+        <div class="card-content">
+            <h3>Minimalist Beige Set</h3>
+            <p>淡雅米白色调，通勤和日常都能轻松驾驭。推荐给喜欢简约、干净风格的人。</p>
+            <a href="#" class="buy-btn">购买链接</a>
+        </div>
+    </div>
+
+    <!-- Card 2 -->
+    <div class="card">
+        <img src="https://picsum.photos/id/1027/600/900" alt="outfit">
+        <div class="card-content">
+            <h3>Korean Soft Girl</h3>
+            <p>韩系软妹风，粉白配色＋轻柔外套，打造温柔又舒适的冬季穿搭。</p>
+            <a href="#" class="buy-btn">Shopee 链接</a>
+        </div>
+    </div>
+
+    <!-- Card 3 -->
+    <div class="card">
+        <img src="https://picsum.photos/id/1005/600/900" alt="outfit">
+        <div class="card-content">
+            <h3>Street Style Black Fit</h3>
+            <p>全黑街头风，适合喜欢干练、酷感风格的女生。完美适合拍照。</p>
+            <a href="#" class="buy-btn">Taobao 链接</a>
+        </div>
+    </div>
+
+    <!-- Add more cards below ... -->
+</div>
+
+</body>
+</html>
