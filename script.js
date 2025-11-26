@@ -4,34 +4,37 @@
     if (!container) return;
 
     const text = "Halley Style ";
-    const rows = 10;       // 行数
-    const cols = 20;       // 每行文字数量
-    const spacingX = 300;  // 横向间距
-    const spacingY = 80;   // 纵向间距
+    const rows = 15;       // 行数
+    const cols = 25;       // 每行文字数量
+    const spacingX = 300;  // 水平间距
+    const spacingY = 80;   // 垂直间距
     const speed = 0.2;     // 移动速度
 
-    // 生成文字链条
+    const spans = [];
+
+    // 初始化文字，覆盖整个屏幕
     for (let r = 0; r < rows; r++) {
         for (let c = 0; c < cols; c++) {
             const span = document.createElement('span');
             span.textContent = text;
-            span.style.left = `${-c * spacingX}px`;
-            span.style.top = `${window.innerHeight - r * spacingY + Math.random() * 20}px`;
+            // 初始位置让文字覆盖整个屏幕
+            span.style.left = `${c * spacingX - window.innerWidth}px`;
+            span.style.top = `${window.innerHeight - r * spacingY}px`;
             container.appendChild(span);
+            spans.push(span);
         }
     }
 
-    const spans = container.querySelectorAll('span');
-
-    // 动画函数
     function animate() {
         spans.forEach(span => {
             let x = parseFloat(span.style.left);
             let y = parseFloat(span.style.top);
-            x += speed;
-            y -= speed * 0.5; // 左下 → 右上方向
 
-            if (x > window.innerWidth + 200 || y < -50) {
+            x += speed;
+            y -= speed; // 左下→右上方向
+
+            // 超出屏幕范围，循环回左下
+            if (x > window.innerWidth + 200 || y < -200) {
                 x = -200;
                 y = window.innerHeight + 50;
             }
@@ -39,16 +42,17 @@
             span.style.left = x + "px";
             span.style.top = y + "px";
         });
+
         requestAnimationFrame(animate);
     }
 
     animate();
 
-    // 窗口大小变化时重新布局
+    // 窗口大小变化时重新调整文字位置
     window.addEventListener('resize', () => {
         spans.forEach((span, i) => {
             const row = Math.floor(i / cols);
-            span.style.top = `${window.innerHeight - row * spacingY + Math.random() * 20}px`;
+            span.style.top = `${window.innerHeight - row * spacingY}px`;
         });
     });
 })();
