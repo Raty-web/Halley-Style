@@ -1,7 +1,11 @@
-/* ===== GLOBAL ===== */
-body {
+/* ===== GLOBAL RESET ===== */
+* {
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
+}
+
+body {
     font-family: 'Inter', sans-serif;
     background: #fafafa;
     color: #333;
@@ -10,19 +14,46 @@ body {
 /* ===== HEADER ===== */
 header {
     text-align: center;
-    padding: 40px 20px 10px;
+    padding: 40px 20px 20px;
 }
 
 header h1 {
-    margin: 0;
-    font-size: 32px;
+    font-size: 34px;
     font-weight: 600;
+    letter-spacing: 0.5px;
 }
 
 header p {
-    margin-top: 8px;
+    margin-top: 10px;
     font-size: 15px;
     color: #666;
+}
+
+/* ===== FILTER BAR ===== */
+.filter-bar {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.filter-btn {
+    padding: 10px 18px;
+    margin: 6px;
+    background: #eee;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: 0.25s ease;
+}
+
+.filter-btn:hover {
+    background: #ddd;
+}
+
+.filter-btn.active {
+    background: #000;
+    color: #fff;
+    transform: scale(1.05);
 }
 
 /* ===== MASONRY GRID ===== */
@@ -34,12 +65,10 @@ header p {
     margin: auto;
 }
 
-/* tablet */
 @media(max-width: 900px) {
     .grid { column-count: 2; }
 }
 
-/* mobile */
 @media(max-width: 600px) {
     .grid { column-count: 1; }
 }
@@ -49,9 +78,15 @@ header p {
     background: #fff;
     display: inline-block;
     margin-bottom: 20px;
-    border-radius: 12px;
+    border-radius: 14px;
     overflow: hidden;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    box-shadow: 0 4px 14px rgba(0,0,0,0.08);
+    transition: 0.25s ease;
+}
+
+.card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 18px rgba(0,0,0,0.12);
 }
 
 .card img {
@@ -59,35 +94,37 @@ header p {
     display: block;
 }
 
+/* ===== CONTENT ===== */
 .card-content {
-    padding: 15px 18px 20px;
+    padding: 18px 20px 22px;
 }
 
 .card-content h3 {
-    margin: 0 0 8px;
     font-size: 18px;
     font-weight: 600;
+    margin-bottom: 10px;
 }
 
 .card-content p {
-    margin: 0 0 12px;
     font-size: 14px;
+    line-height: 1.55;
+    margin-bottom: 15px;
     color: #555;
-    line-height: 1.5;
 }
 
 /* ===== BUTTON ===== */
 .buy-btn {
     display: inline-block;
-    padding: 10px 14px;
+    padding: 10px 16px;
     background: #000;
     color: #fff;
     text-decoration: none;
     border-radius: 8px;
     font-size: 14px;
-    transition: 0.2s;
+    transition: 0.25s;
 }
 
 .buy-btn:hover {
     background: #444;
+    transform: translateY(-2px);
 }
