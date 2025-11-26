@@ -1,153 +1,155 @@
 <!DOCTYPE html>
 <html lang="zh">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Lookbook | Outfit Gallery</title>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Lookbook | Outfit Gallery</title>
 
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
 
-    <style>
-        /* ===== GLOBAL ===== */
-        body {
-            margin: 0;
-            padding: 0;
-            font-family: 'Inter', sans-serif;
-            background: #fafafa;
-            color: #333;
-            position: relative;
-        }
+<style>
+/* ===== GLOBAL ===== */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Inter', sans-serif;
+    background: #fafafa;
+    color: #333;
+    position: relative;
+    overflow-x: hidden;
+}
 
-        header {
-            text-align: center;
-            padding: 40px 20px 10px;
-        }
+header {
+    text-align: center;
+    padding: 40px 20px 10px;
+}
 
-        header h1 {
-            margin: 0;
-            font-size: 32px;
-            font-weight: 600;
-        }
+header h1 {
+    margin: 0;
+    font-size: 32px;
+    font-weight: 600;
+}
 
-        header p {
-            margin-top: 8px;
-            font-size: 15px;
-            color: #666;
-        }
+header p {
+    margin-top: 8px;
+    font-size: 15px;
+    color: #666;
+}
 
-        /* ===== FILTER BAR (可选) ===== */
-        .filter-bar {
-            text-align: center;
-            margin-bottom: 20px;
-        }
+/* ===== FILTER BAR (可选) ===== */
+.filter-bar {
+    text-align: center;
+    margin-bottom: 20px;
+}
 
-        .filter-btn {
-            padding: 8px 16px;
-            margin: 5px;
-            background: #eee;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-            font-size: 14px;
-            transition: 0.25s ease;
-        }
+.filter-btn {
+    padding: 8px 16px;
+    margin: 5px;
+    background: #eee;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: 0.25s ease;
+}
 
-        .filter-btn.active {
-            background: #000;
-            color: #fff;
-            transform: scale(1.05);
-        }
+.filter-btn.active {
+    background: #000;
+    color: #fff;
+    transform: scale(1.05);
+}
 
-        /* ===== MASONRY GRID ===== */
-        .grid {
-            column-count: 3;
-            column-gap: 20px;
-            padding: 20px;
-            max-width: 1200px;
-            margin: auto;
-        }
+/* ===== MASONRY GRID ===== */
+.grid {
+    column-count: 3;
+    column-gap: 20px;
+    padding: 20px;
+    max-width: 1200px;
+    margin: auto;
+}
 
-        @media(max-width: 900px) { .grid { column-count: 2; } }
-        @media(max-width: 600px) { .grid { column-count: 1; } }
+@media(max-width: 900px) { .grid { column-count: 2; } }
+@media(max-width: 600px) { .grid { column-count: 1; } }
 
-        .card {
-            background: #fff;
-            display: inline-block;
-            margin-bottom: 20px;
-            border-radius: 12px;
-            overflow: hidden;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-            transition: 0.25s ease;
-        }
+.card {
+    background: #fff;
+    display: inline-block;
+    margin-bottom: 20px;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    transition: 0.25s ease;
+}
 
-        .card:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 18px rgba(0,0,0,0.12);
-        }
+.card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 18px rgba(0,0,0,0.12);
+}
 
-        .card img {
-            width: 100%;
-            display: block;
-        }
+.card img {
+    width: 100%;
+    display: block;
+}
 
-        .card-content {
-            padding: 15px 18px 20px;
-        }
+.card-content {
+    padding: 15px 18px 20px;
+}
 
-        .card-content h3 {
-            margin: 0 0 8px;
-            font-size: 18px;
-            font-weight: 600;
-        }
+.card-content h3 {
+    margin: 0 0 8px;
+    font-size: 18px;
+    font-weight: 600;
+}
 
-        .card-content p {
-            margin: 0 0 12px;
-            font-size: 14px;
-            color: #555;
-            line-height: 1.5;
-        }
+.card-content p {
+    margin: 0 0 12px;
+    font-size: 14px;
+    color: #555;
+    line-height: 1.5;
+}
 
-        .buy-btn {
-            display: inline-block;
-            padding: 10px 14px;
-            background: #000;
-            color: #fff;
-            text-decoration: none;
-            border-radius: 8px;
-            font-size: 14px;
-            transition: 0.2s;
-        }
+.buy-btn {
+    display: inline-block;
+    padding: 10px 14px;
+    background: #000;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 8px;
+    font-size: 14px;
+    transition: 0.2s;
+}
 
-        .buy-btn:hover { background: #444; }
+.buy-btn:hover { background: #444; }
 
-        /* ===== HALLEY BACKGROUND ===== */
-        .halley-background {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            overflow: hidden;
-            z-index: -1; /* 放在最底层 */
-            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-        }
+/* ===== HALLEY BACKGROUND ===== */
+.halley-background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 200%; /* 扩大容器保证文字覆盖全屏 */
+    height: 200%;
+    pointer-events: none;
+    overflow: hidden;
+    z-index: -1;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    transform: rotate(-45deg); /* 整体旋转，让文字沿左下→右上方向排列 */
+}
 
-        .halley-background span {
-            position: absolute;
-            font-size: 50px;
-            color: rgba(0,0,0,0.05);
-            white-space: nowrap;
-            filter: blur(2px);
-            user-select: none;
-            will-change: transform;
-        }
-    </style>
+.halley-background span {
+    position: absolute;
+    font-size: 50px;
+    color: #666261; /* 文字颜色 */
+    white-space: nowrap;
+    filter: blur(2px);
+    user-select: none;
+    will-change: transform;
+}
+</style>
 </head>
 <body>
 
-<!-- Halley Style 背景文字容器 -->
+<!-- Halley Style 背景文字 -->
 <div class="halley-background"></div>
 
 <header>
@@ -155,7 +157,6 @@
     <p>Weekly Outfit Inspiration · Korean · Minimalist · Streetwear</p>
 </header>
 
-<!-- 可选分类过滤 -->
 <div class="filter-bar">
     <button class="filter-btn active" data-category="all">全部</button>
     <button class="filter-btn" data-category="minimalist">Minimalist</button>
@@ -164,7 +165,6 @@
 </div>
 
 <div class="grid">
-    <!-- Card 1 -->
     <div class="card" data-category="minimalist">
         <img src="https://picsum.photos/id/1011/600/900" alt="outfit">
         <div class="card-content">
@@ -174,7 +174,6 @@
         </div>
     </div>
 
-    <!-- Card 2 -->
     <div class="card" data-category="korean">
         <img src="https://picsum.photos/id/1027/600/900" alt="outfit">
         <div class="card-content">
@@ -184,7 +183,6 @@
         </div>
     </div>
 
-    <!-- Card 3 -->
     <div class="card" data-category="street">
         <img src="https://picsum.photos/id/1005/600/900" alt="outfit">
         <div class="card-content">
@@ -193,11 +191,8 @@
             <a href="#" class="buy-btn">Taobao 链接</a>
         </div>
     </div>
-
-    <!-- 可继续添加更多卡片 -->
 </div>
 
-<!-- JS 脚本 -->
 <script>
 /* ===== HALLEY STYLE 背景文字动画 ===== */
 (function() {
@@ -205,32 +200,36 @@
     if (!container) return;
 
     const text = "Halley Style ";
-    const rows = 10;
-    const cols = 20;
+    const rows = 15;
+    const cols = 25;
     const spacingX = 300;
     const spacingY = 80;
     const speed = 0.2;
 
+    // 生成文字，初始位置已覆盖整个屏幕
+    const spans = [];
     for (let r = 0; r < rows; r++) {
         for (let c = 0; c < cols; c++) {
             const span = document.createElement('span');
             span.textContent = text;
-            span.style.left = `${-c * spacingX}px`;
-            span.style.top = `${window.innerHeight - r * spacingY + Math.random() * 20}px`;
+            // 初始位置从左下到右上已覆盖
+            span.style.left = `${c * spacingX - window.innerWidth}px`;
+            span.style.top = `${window.innerHeight - r * spacingY}px`;
             container.appendChild(span);
+            spans.push(span);
         }
     }
-
-    const spans = container.querySelectorAll('span');
 
     function animate() {
         spans.forEach(span => {
             let x = parseFloat(span.style.left);
             let y = parseFloat(span.style.top);
-            x += speed;
-            y -= speed * 0.5;
 
-            if (x > window.innerWidth + 200 || y < -50) {
+            x += speed;
+            y -= speed;
+
+            // 超出容器边界，循环回左下
+            if (x > window.innerWidth + 200 || y < -200) {
                 x = -200;
                 y = window.innerHeight + 50;
             }
@@ -238,6 +237,7 @@
             span.style.left = x + "px";
             span.style.top = y + "px";
         });
+
         requestAnimationFrame(animate);
     }
 
@@ -246,7 +246,7 @@
     window.addEventListener('resize', () => {
         spans.forEach((span, i) => {
             const row = Math.floor(i / cols);
-            span.style.top = `${window.innerHeight - row * spacingY + Math.random() * 20}px`;
+            span.style.top = `${window.innerHeight - row * spacingY}px`;
         });
     });
 })();
@@ -265,13 +265,10 @@
 
             cards.forEach(card => {
                 const cardCategory = card.getAttribute("data-category");
-
                 if (category === "all" || cardCategory === category) {
                     card.style.display = "inline-block";
                     card.style.opacity = "0";
-                    setTimeout(() => {
-                        card.style.opacity = "1";
-                    }, 50);
+                    setTimeout(() => { card.style.opacity = "1"; }, 50);
                 } else {
                     card.style.display = "none";
                 }
@@ -280,6 +277,5 @@
     });
 })();
 </script>
-
 </body>
 </html>
