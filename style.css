@@ -1,4 +1,4 @@
-/* ===== GLOBAL RESET ===== */
+/* ===== GLOBAL RESET ===== */ 
 * {
     margin: 0;
     padding: 0;
@@ -127,4 +127,27 @@ header p {
 .buy-btn:hover {
     background: #444;
     transform: translateY(-2px);
+}
+
+/* ===== HALLEY BACKGROUND ===== */
+.halley-background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    overflow: hidden;
+    z-index: -1; /* 放在最底层 */
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
+.halley-background span {
+    position: absolute;
+    font-size: 50px;
+    color: rgba(0,0,0,0.05); /* 模糊远景 */
+    white-space: nowrap;
+    filter: blur(2px);
+    user-select: none;
+    will-change: transform;
 }
