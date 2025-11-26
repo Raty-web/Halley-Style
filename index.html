@@ -9,12 +9,14 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
 
     <style>
+        /* ===== GLOBAL ===== */
         body {
             margin: 0;
             padding: 0;
             font-family: 'Inter', sans-serif;
             background: #fafafa;
             color: #333;
+            position: relative;
         }
 
         header {
@@ -34,7 +36,30 @@
             color: #666;
         }
 
-        /* Masonry Grid */
+        /* ===== FILTER BAR (可选) ===== */
+        .filter-bar {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .filter-btn {
+            padding: 8px 16px;
+            margin: 5px;
+            background: #eee;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: 0.25s ease;
+        }
+
+        .filter-btn.active {
+            background: #000;
+            color: #fff;
+            transform: scale(1.05);
+        }
+
+        /* ===== MASONRY GRID ===== */
         .grid {
             column-count: 3;
             column-gap: 20px;
@@ -43,13 +68,8 @@
             margin: auto;
         }
 
-        @media(max-width: 900px) {
-            .grid { column-count: 2; }
-        }
-
-        @media(max-width: 600px) {
-            .grid { column-count: 1; }
-        }
+        @media(max-width: 900px) { .grid { column-count: 2; } }
+        @media(max-width: 600px) { .grid { column-count: 1; } }
 
         .card {
             background: #fff;
@@ -58,6 +78,12 @@
             border-radius: 12px;
             overflow: hidden;
             box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            transition: 0.25s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 18px rgba(0,0,0,0.12);
         }
 
         .card img {
@@ -93,21 +119,53 @@
             transition: 0.2s;
         }
 
-        .buy-btn:hover {
-            background: #444;
+        .buy-btn:hover { background: #444; }
+
+        /* ===== HALLEY BACKGROUND ===== */
+        .halley-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            overflow: hidden;
+            z-index: -1; /* 放在最底层 */
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        }
+
+        .halley-background span {
+            position: absolute;
+            font-size: 50px;
+            color: rgba(0,0,0,0.05);
+            white-space: nowrap;
+            filter: blur(2px);
+            user-select: none;
+            will-change: transform;
         }
     </style>
 </head>
 <body>
+
+<!-- Halley Style 背景文字容器 -->
+<div class="halley-background"></div>
 
 <header>
     <h1>Lookbook</h1>
     <p>Weekly Outfit Inspiration · Korean · Minimalist · Streetwear</p>
 </header>
 
+<!-- 可选分类过滤 -->
+<div class="filter-bar">
+    <button class="filter-btn active" data-category="all">全部</button>
+    <button class="filter-btn" data-category="minimalist">Minimalist</button>
+    <button class="filter-btn" data-category="korean">Korean</button>
+    <button class="filter-btn" data-category="street">Street</button>
+</div>
+
 <div class="grid">
     <!-- Card 1 -->
-    <div class="card">
+    <div class="card" data-category="minimalist">
         <img src="https://picsum.photos/id/1011/600/900" alt="outfit">
         <div class="card-content">
             <h3>Minimalist Beige Set</h3>
@@ -117,7 +175,7 @@
     </div>
 
     <!-- Card 2 -->
-    <div class="card">
+    <div class="card" data-category="korean">
         <img src="https://picsum.photos/id/1027/600/900" alt="outfit">
         <div class="card-content">
             <h3>Korean Soft Girl</h3>
@@ -127,7 +185,7 @@
     </div>
 
     <!-- Card 3 -->
-    <div class="card">
+    <div class="card" data-category="street">
         <img src="https://picsum.photos/id/1005/600/900" alt="outfit">
         <div class="card-content">
             <h3>Street Style Black Fit</h3>
@@ -136,8 +194,92 @@
         </div>
     </div>
 
-    <!-- Add more cards below ... -->
+    <!-- 可继续添加更多卡片 -->
 </div>
+
+<!-- JS 脚本 -->
+<script>
+/* ===== HALLEY STYLE 背景文字动画 ===== */
+(function() {
+    const container = document.querySelector('.halley-background');
+    if (!container) return;
+
+    const text = "Halley Style ";
+    const rows = 10;
+    const cols = 20;
+    const spacingX = 300;
+    const spacingY = 80;
+    const speed = 0.2;
+
+    for (let r = 0; r < rows; r++) {
+        for (let c = 0; c < cols; c++) {
+            const span = document.createElement('span');
+            span.textContent = text;
+            span.style.left = `${-c * spacingX}px`;
+            span.style.top = `${window.innerHeight - r * spacingY + Math.random() * 20}px`;
+            container.appendChild(span);
+        }
+    }
+
+    const spans = container.querySelectorAll('span');
+
+    function animate() {
+        spans.forEach(span => {
+            let x = parseFloat(span.style.left);
+            let y = parseFloat(span.style.top);
+            x += speed;
+            y -= speed * 0.5;
+
+            if (x > window.innerWidth + 200 || y < -50) {
+                x = -200;
+                y = window.innerHeight + 50;
+            }
+
+            span.style.left = x + "px";
+            span.style.top = y + "px";
+        });
+        requestAnimationFrame(animate);
+    }
+
+    animate();
+
+    window.addEventListener('resize', () => {
+        spans.forEach((span, i) => {
+            const row = Math.floor(i / cols);
+            span.style.top = `${window.innerHeight - row * spacingY + Math.random() * 20}px`;
+        });
+    });
+})();
+
+/* ===== CATEGORY FILTER 功能 ===== */
+(function() {
+    const filterButtons = document.querySelectorAll(".filter-btn");
+    const cards = document.querySelectorAll(".card");
+
+    filterButtons.forEach(btn => {
+        btn.addEventListener("click", () => {
+            const category = btn.getAttribute("data-category");
+
+            filterButtons.forEach(b => b.classList.remove("active"));
+            btn.classList.add("active");
+
+            cards.forEach(card => {
+                const cardCategory = card.getAttribute("data-category");
+
+                if (category === "all" || cardCategory === category) {
+                    card.style.display = "inline-block";
+                    card.style.opacity = "0";
+                    setTimeout(() => {
+                        card.style.opacity = "1";
+                    }, 50);
+                } else {
+                    card.style.display = "none";
+                }
+            });
+        });
+    });
+})();
+</script>
 
 </body>
 </html>
