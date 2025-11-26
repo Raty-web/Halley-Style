@@ -4,52 +4,96 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Lookbook | Outfit Gallery</title>
-    <link rel="stylesheet" href="style.css">
 
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
-    
+
+    <!-- 外部 CSS -->
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
+<!-- ========== HEADER ========== -->
 <header>
     <h1>Lookbook</h1>
-    <p>Weekly Outfit Inspiration · Korean · Minimalist · Streetwear</p>
+    <p>Weekly Outfit Inspiration · Minimalist · Korean · Street</p>
 </header>
 
+<!-- ========== FILTER BAR ========== -->
+<div class="filter-bar">
+    <button class="filter-btn active" data-category="all">全部</button>
+    <button class="filter-btn" data-category="minimalist">极简</button>
+    <button class="filter-btn" data-category="korean">韩系</button>
+    <button class="filter-btn" data-category="street">街头</button>
+</div>
+
+<!-- ========== GALLERY GRID ========== -->
 <div class="grid">
+
     <!-- Card 1 -->
-    <div class="card">
+    <div class="card" data-category="minimalist">
         <img src="https://picsum.photos/id/1011/600/900" alt="outfit">
         <div class="card-content">
             <h3>Minimalist Beige Set</h3>
-            <p>淡雅米白色调，通勤和日常都能轻松驾驭。推荐给喜欢简约、干净风格的人。</p>
+            <p>米色极简通勤套装，柔和干净，适合各种场合。</p>
             <a href="#" class="buy-btn">购买链接</a>
         </div>
     </div>
 
     <!-- Card 2 -->
-    <div class="card">
+    <div class="card" data-category="korean">
         <img src="https://picsum.photos/id/1027/600/900" alt="outfit">
         <div class="card-content">
             <h3>Korean Soft Girl</h3>
-            <p>韩系软妹风，粉白配色＋轻柔外套，打造温柔又舒适的冬季穿搭。</p>
+            <p>粉白韩系软妹风，温柔外套＋轻柔色调。</p>
             <a href="#" class="buy-btn">Shopee 链接</a>
         </div>
     </div>
 
     <!-- Card 3 -->
-    <div class="card">
+    <div class="card" data-category="street">
         <img src="https://picsum.photos/id/1005/600/900" alt="outfit">
         <div class="card-content">
             <h3>Street Style Black Fit</h3>
-            <p>全黑街头风，适合喜欢干练、酷感风格的女生。完美适合拍照。</p>
+            <p>黑色街头风，酷感十足，显瘦且适合拍照。</p>
             <a href="#" class="buy-btn">Taobao 链接</a>
         </div>
     </div>
 
-    <!-- Add more cards below ... -->
+    <!-- Card 4 -->
+    <div class="card" data-category="minimalist">
+        <img src="https://picsum.photos/id/1018/600/900" alt="outfit">
+        <div class="card-content">
+            <h3>White Clean Fit</h3>
+            <p>白色清爽穿搭，高级且自然，通勤最佳搭配。</p>
+            <a href="#" class="buy-btn">购买链接</a>
+        </div>
+    </div>
+
+    <!-- Card 5 -->
+    <div class="card" data-category="korean">
+        <img src="https://picsum.photos/id/1024/600/900" alt="outfit">
+        <div class="card-content">
+            <h3>Korean Winter Layer</h3>
+            <p>韩系百搭大衣＋围巾，冬天拍照必备。</p>
+            <a href="#" class="buy-btn">购买链接</a>
+        </div>
+    </div>
+
+    <!-- Card 6 -->
+    <div class="card" data-category="street">
+        <img src="https://picsum.photos/id/1012/600/900" alt="outfit">
+        <div class="card-content">
+            <h3>Urban Street Grey</h3>
+            <p>灰黑街头风，低调却有个性。</p>
+            <a href="#" class="buy-btn">购买链接</a>
+        </div>
+    </div>
+
 </div>
+
+<!-- ========== JS ========== -->
+<script src="script.js"></script>
 
 </body>
 </html>
